@@ -5,7 +5,7 @@ export const metadata: Metadata = {
 	title: "Partido Urubista",
 	description: "A plataforma do urubismo",
 	verification: {
-		google: "google54c5b0c84abb80eb.html",
+		google: "SgaXQp6ouoWi-h_GlNEJe6Jj7qfb41CFnTs1P-ms89A",
 	},
 };
 
