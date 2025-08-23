@@ -1,10 +1,12 @@
 "use client";
 
-import { FormProvider, useForm } from "react-hook-form";
-
 import { MembershipFormSchema } from "@/core/domain/dtos/membership-form.dto";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Trefoil } from "ldrs/react";
+import "ldrs/react/Trefoil.css";
+import { FormProvider, useForm } from "react-hook-form";
 import z from "zod";
+import { useMembershipCreate } from "../../hooks/membership-application/use-membership-application";
 import { Button } from "../ui-external/shadcn-ui/button";
 import { Checkbox } from "../ui-external/shadcn-ui/checkbox";
 import {
@@ -37,13 +39,25 @@ const MembershipForm: React.FC = () => {
 			escaralhamentoLevel: undefined,
 		},
 	});
+	const { createMembership, isLoading } = useMembershipCreate();
 
 	const onSubmit = (data: z.infer<typeof MembershipFormSchema>) => {
-		console.log("Form submitted with data:", data);
+		console.log(data);
+		createMembership(data);
 	};
 
 	return (
 		<ScrollArea className="flex flex-col h-full w-full sm:w-[90%] md:w-[80%] lg:w-[70%] xl:w-[50%] px-4 sm:px-6 md:px-8 lg:px-10 bg-black py-2 rounded-xl">
+			{isLoading && (
+				<Trefoil
+					size="40"
+					stroke="4"
+					strokeLength="0.15"
+					bgOpacity="0.1"
+					speed="1.4"
+					color="black"
+				/>
+			)}
 			<section className="flex flex-col gap-4 rounded-[0px]">
 				<Title />
 

@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 };
 
 const Page: React.FC = () => {
+	
 	return (
 		<MainLayout navbar={false}>
 			<div className="h-full w-full flex flex-col justify-center items-center ">
