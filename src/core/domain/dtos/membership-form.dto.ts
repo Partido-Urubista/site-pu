@@ -5,6 +5,31 @@ import z from "zod";
  * @description Defines the schema for the membership form using Zod.
  */
 
+export interface MembershipFormDTO {
+	youtubeId: string;
+	discordId?: string;
+	age: string;
+	state: string;
+	youtubeChannels: string;
+	onlinePresence:
+		| "Pouco ativo"
+		| "Moderadamente online"
+		| "Cronicamente online";
+	escaralhamentoLevel: "Iniciante" | "Escaralhador médio" | "Doutrinador";
+	politicalIdeology: string;
+	neurodivergence?: string;
+	currentSituation:
+		| "Ensino Médio"
+		| "Faculdade"
+		| "Técnico"
+		| "Vestibular"
+		| "Trabalhando"
+		| "Desempregado";
+	howDidYouHear: string;
+	motivation: string;
+}
+
+
 export type MembershipType = z.infer<typeof MembershipFormSchema>;
 
 export const MembershipFormSchema = z.object({
