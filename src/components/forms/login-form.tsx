@@ -1,24 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Label } from "@radix-ui/react-label";
+import { Eye, EyeOff, Lock, UserCircle } from "lucide-react";
+import Image from "next/image";
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import z from "zod";
+import logo_pu from "../../../public/images/logos/logo-pu-192x192.png";
+import { Button } from "../ui-external/shadcn-ui/button";
+import { Checkbox } from "../ui-external/shadcn-ui/checkbox";
 import {
+	FormControl,
 	FormField,
 	FormItem,
 	FormLabel,
-	FormControl,
 	FormMessage,
 } from "../ui-external/shadcn-ui/form";
 import { Input } from "../ui-external/shadcn-ui/input";
-import { Button } from "../ui-external/shadcn-ui/button";
-import { zodResolver } from "@hookform/resolvers/zod";
-import z from "zod";
-import { Checkbox } from "../ui-external/shadcn-ui/checkbox";
-import logo_pu from "../../../public/images/logos/logo-pu-192x192.png";
-import Image from "next/image";
-import { useState } from "react";
-import { Eye, EyeOff, UserCircle, Lock } from "lucide-react";
 
 const LoginForm = () => {
 	const [showPassword, setShowPassword] = useState(false);
@@ -42,7 +42,6 @@ const LoginForm = () => {
 	const onSubmit = (data: any) => {
 		setIsLoading(true);
 		console.log("Form submitted with data:", data);
-		// Simulate API call
 		setTimeout(() => setIsLoading(false), 1500);
 	};
 
