@@ -6,7 +6,7 @@ import {
 	OnlinePresence,
 } from "@prisma/client";
 
-export class CreateMembershipApplicationService {
+export class MembershipApplicationService {
 	async create(data: MembershipType): Promise<boolean> {
 		const {
 			age,
@@ -46,6 +46,20 @@ export class CreateMembershipApplicationService {
 		} catch (error) {
 			console.error("Error creating membership application:", error);
 			return false;
+		}
+	}
+	async list(): Promise<MembershipType[]> {
+		try {
+			const applications =
+				await prismaClient.membershipApplication.findMany({
+					orderBy: { createdAt: "asc" },
+				});
+
+				return applications as unknown as MembershipType[];
+
+		} catch (error) {
+			console.error("Error retrieving membership applications:", error);
+			return [];
 		}
 	}
 }

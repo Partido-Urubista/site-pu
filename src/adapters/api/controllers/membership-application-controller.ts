@@ -1,12 +1,12 @@
 import { MembershipType } from "@/core/domain/dtos/membership-form.dto";
 import { ResponseAPI } from "@/core/domain/dtos/response-api";
-import { CreateMembershipApplicationService } from "../services/membership-application-service";
+import { MembershipApplicationService } from "../services/membership-application-service";
 
-export class CreateMembershipApplicationController {
-	private readonly membershipApplicationService: CreateMembershipApplicationService =
-		new CreateMembershipApplicationService();
+export class MembershipApplicationController {
+	private readonly membershipApplicationService: MembershipApplicationService =
+		new MembershipApplicationService();
 
-	async execute(data: MembershipType): Promise<ResponseAPI<boolean>> {
+	async create(data: MembershipType): Promise<ResponseAPI<boolean>> {
 		try {
 			const result = await this.membershipApplicationService.create(data);
 
@@ -27,5 +27,28 @@ export class CreateMembershipApplicationController {
 				status: 500,
 			});
 		}
+	}
+	async list(): Promise<ResponseAPI<MembershipType[]>> {
+		try {
+			const result = await this.membershipApplicationService.list();
+
+			return new ResponseAPI({
+				sucess: true,
+				message: "Membership applications retrieved successfully",
+				data: result,
+				status: 200,
+			});
+		} catch (error: unknown) {
+			const errorMessage =
+				error instanceof Error
+					? error.message
+					: "Failed to retrieve membership applications";
+			return new ResponseAPI({
+				sucess: false,
+				message: errorMessage,
+				status: 500,
+			});
+		}
+		
 	}
 }
