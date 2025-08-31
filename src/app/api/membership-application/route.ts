@@ -1,15 +1,13 @@
-import { MembershipApplicationController } from "@/adapters/api/controllers/membership-application-controller";
+import { ListMembershipApplicationController } from "@/adapters/api/controllers/list-membership-application-controller";
 import { apiResponse, handleError } from "@/adapters/handlers";
 import { NextRequest } from "next/server";
+import { CreateMembershipApplicationController } from "./../../../adapters/api/controllers/create-membership-application-controller";
 
-/**
- * Handles POST requests to create a new membership application.
- */
 export async function POST(request: NextRequest) {
 	try {
 		const body = await request.json();
 
-		const controller = new MembershipApplicationController();
+		const controller = new CreateMembershipApplicationController();
 		const response = await controller.create(body);
 
 		return apiResponse({
@@ -23,7 +21,7 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
 	try {
-		const controller = new MembershipApplicationController();
+		const controller = new ListMembershipApplicationController();
 		const response = await controller.list();
 
 		return apiResponse({
