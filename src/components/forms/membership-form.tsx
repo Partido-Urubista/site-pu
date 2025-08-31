@@ -7,7 +7,7 @@ import "ldrs/react/Trefoil.css";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import z from "zod";
-import { useMembershipCreate } from "../../hooks/membership-application/use-membership-application";
+import { useMembershipCreate } from "../../hooks/membership-application/use-membership-application-create";
 import { Button } from "../ui-external/shadcn-ui/button";
 import { Checkbox } from "../ui-external/shadcn-ui/checkbox";
 import {
