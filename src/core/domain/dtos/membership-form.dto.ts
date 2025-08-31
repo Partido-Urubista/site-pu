@@ -29,7 +29,6 @@ export interface MembershipFormDTO {
 	motivation: string;
 }
 
-
 export type MembershipType = z.infer<typeof MembershipFormSchema>;
 
 export const MembershipFormSchema = z.object({
