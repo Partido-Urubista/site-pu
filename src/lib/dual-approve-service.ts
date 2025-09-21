@@ -1,3 +1,5 @@
+'use server';
+
 import { ApplicationStatus, PrismaClient } from "@prisma/client";
 import { discordBot } from "./discord-bot";
 import { emailService } from "./email-service";

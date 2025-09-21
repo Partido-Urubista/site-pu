@@ -21,7 +21,7 @@ export function DualApprovalButton({
   email,
   discordId 
 }: DualApprovalButtonProps) {
-  const [discordUserId, setDiscordUserId] = useState(discordId || '');
+  const [discordUserId, setDiscordUserId] = useState(discordId || "");
   const [showApprovalForm, setShowApprovalForm] = useState(false);
   
   const { mutate: approve, isPending, isSuccess, data } = useDualApproval();

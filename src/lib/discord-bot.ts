@@ -1,4 +1,11 @@
-import { ChannelType, Client, GatewayIntentBits, TextChannel } from 'discord.js';
+import 'server-only';
+
+import {
+  ChannelType,
+  Client,
+  GatewayIntentBits,
+  TextChannel
+} from 'discord.js';
 
 class DiscordBot {
   private client: Client;
@@ -149,4 +156,5 @@ class DiscordBot {
   }
 }
 
+// Create and export the singleton instance
 export const discordBot = new DiscordBot();
