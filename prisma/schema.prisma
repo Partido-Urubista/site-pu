@@ -45,6 +45,7 @@ model MembershipApplication {
   
   youtubeId         String
   discordId         String?
+  email             String
   age               Int
   state             String
   youtubeChannels   String   @db.Text
