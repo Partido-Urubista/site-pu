@@ -8,6 +8,7 @@ import z from "zod";
 export interface MembershipFormDTO {
 	youtubeId: string;
 	discordId?: string;
+	email: string;
 	age: string;
 	state: string;
 	youtubeChannels: string;
@@ -34,6 +35,7 @@ export type MembershipType = z.infer<typeof MembershipFormSchema>;
 export const MembershipFormSchema = z.object({
 	youtubeId: z.string().min(1, { message: "Entrada obrigatória!" }),
 	discordId: z.string().optional(),
+	email: z.string().email("Email inválido").min(1, "Email é obrigatório"),
 	age: z
 		.string()
 		.min(1, { message: "Entrada obrigatória!" })
