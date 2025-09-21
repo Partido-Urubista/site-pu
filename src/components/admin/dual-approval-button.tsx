@@ -17,8 +17,7 @@ interface DualApprovalButtonProps {
 }
 
 export function DualApprovalButton({ 
-  applicationId, 
-  youtubeId, 
+  applicationId,
   email,
   discordId 
 }: DualApprovalButtonProps) {

@@ -11,7 +11,7 @@ interface ApprovalData {
 }
 
 export async function approveMembershipDual(data: ApprovalData) {
-	const { applicationId, adminId, discordUserId } = data;
+	const { applicationId, discordUserId } = data;
 
 	try {
 		const application = await prisma.membershipApplication.findUnique({
