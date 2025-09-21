@@ -4,7 +4,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Label } from "@radix-ui/react-label";
 import { Eye, EyeOff, Lock, UserCircle } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import z from "zod";
@@ -19,16 +21,20 @@ import {
 	FormMessage,
 } from "../ui-external/shadcn-ui/form";
 import { Input } from "../ui-external/shadcn-ui/input";
+import { useAuthLogin } from "@/hooks/auth/use-auth.login";
 
 const LoginForm = () => {
 	const [showPassword, setShowPassword] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
+	const router = useRouter();
+	const { data: session } = useSession();
+
+	const { mutate: login, isPending, error } = useAuthLogin();
 
 	const form = useForm({
 		resolver: zodResolver(
 			z.object({
-				login: z.string().nonempty("Login is required"),
-				password: z.string().nonempty("Password is required"),
+				login: z.string().nonempty("Login é obrigatório"),
+				password: z.string().nonempty("Senha é obrigatória"),
 				rememberMe: z.boolean(),
 			})
 		),
@@ -40,9 +46,16 @@ const LoginForm = () => {
 	});
 
 	const onSubmit = (data: any) => {
-		setIsLoading(true);
-		console.log("Form submitted with data:", data);
-		setTimeout(() => setIsLoading(false), 1500);
+		login(data, {
+			onSuccess: () => {
+				// Redireciona com base na role do usuário, por enquanto todos vão pro mesmo lugar ;-;
+				if (session?.user?.role === "ADMIN") {
+					router.push("/dashboard/forms");
+				} else {
+					router.push("/dashboard/forms");
+				}
+			},
+		});
 	};
 
 	return (
@@ -60,14 +73,14 @@ const LoginForm = () => {
 							<FormItem>
 								<FormLabel className="text-white">
 									<Label className="after:content-['*'] after:text-[#F55B5B] text-sm sm:text-base">
-										Qual seu @ no YT?
+										Email ou @ do YT
 									</Label>
 								</FormLabel>
 								<FormControl>
 									<div className="relative">
 										<UserCircle className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-5 w-5" />
 										<Input
-											placeholder="@urubu_de_uruguaiana"
+											placeholder="admin@partidourubista.com"
 											{...field}
 											className="bg-gray-900 h-12 pl-10 pr-4 rounded-lg text-white border-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 transition-all"
 										/>
@@ -138,12 +151,18 @@ const LoginForm = () => {
 						</a>
 					</div>
 
+					{error && (
+						<div className="text-[#F55B5B] text-sm text-center">
+							{error.message}
+						</div>
+					)}
+
 					<Button
 						type="submit"
-						disabled={isLoading}
+						disabled={isPending}
 						className="w-full h-12 mt-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium text-base transition-all duration-200 disabled:opacity-70"
 					>
-						{isLoading ? "Entrando..." : "Entrar"}
+						{isPending ? "Entrando..." : "Entrar"}
 					</Button>
 				</form>
 			</FormProvider>
