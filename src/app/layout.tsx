@@ -1,3 +1,4 @@
+import { AuthProvider } from "@/components/provides/auth-provider";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -16,7 +17,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="pt-br">
-			<body className="antialiased">{children}</body>
+			<body className="antialiased">
+				<AuthProvider>{children}</AuthProvider>
+			</body>
 		</html>
 	);
 }
