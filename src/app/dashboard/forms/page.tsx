@@ -78,7 +78,7 @@ export default async function FormsPage() {
 							<tbody>
 								{applications.map((app, index) => (
 									<tr
-										key={app.id}
+										key={`${app.id} - ${index}`}
 										className="border-b border-gray-800/50 hover:bg-gray-900/30 transition-colors"
 									>
 										<td className="py-3 px-4 text-sm">
