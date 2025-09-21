@@ -37,6 +37,7 @@ const MembershipForm: React.FC = () => {
 			state: "",
 			youtubeId: "",
 			discordId: "",
+			email: "",
 			motivation: "",
 			howDidYouHear: "",
 			neurodivergence: "",
@@ -64,7 +65,9 @@ const MembershipForm: React.FC = () => {
 	if (isSuccess) {
 		return (
 			<div className="flex flex-col items-center justify-center text-center text-white bg-black p-8 rounded-xl h-96">
-				<h2 className="text-2xl font-bold mb-4">Inscrição enviada com sucesso!</h2>
+				<h2 className="text-2xl font-bold mb-4">
+					Inscrição enviada com sucesso!
+				</h2>
 				<p>Agradecemos seu interesse. Entraremos em contato em breve.</p>
 			</div>
 		);
@@ -127,7 +130,31 @@ const MembershipForm: React.FC = () => {
 									</FormItem>
 								)}
 							/>
-
+							<FormField
+								control={form.control}
+								name="email"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel className="text-white">
+											<Label className="after:content-['*'] after:text-[#F55B5B] text-sm sm:text-base">
+												Email para contato
+											</Label>
+										</FormLabel>
+										<FormControl>
+											<Input
+												type="email"
+												placeholder="camarada@email.com"
+												{...field}
+												className="bg-white h-10 sm:h-12 md:h-14 rounded-[1] text-sm sm:text-base"
+											/>
+										</FormControl>
+										<FormDescription className="text-white text-xs sm:text-sm">
+											Obrigatório - usado para envio do convite do Discord
+										</FormDescription>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
 							<FormField
 								control={form.control}
 								name="age"

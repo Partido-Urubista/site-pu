@@ -11,6 +11,7 @@ export class MembershipApplicationService {
 		const {
 			age,
 			state,
+			email,
 			discordId,
 			youtubeId,
 			motivation,
@@ -29,6 +30,7 @@ export class MembershipApplicationService {
 					data: {
 						age: Number.parseInt(age, 10),
 						state,
+						email,
 						discordId,
 						youtubeId,
 						motivation,
