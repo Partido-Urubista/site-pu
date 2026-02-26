@@ -1,9 +1,9 @@
+import { DualApprovalButton } from "@/components/admin/dual-approval-button";
 import MainLayout from "@/components/layouts/main-layout";
 import { requireAdmin } from "@/lib/auth-server";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
-
 
 //todo: melhorar o layout da página para os admins
 export default async function FormsPage() {
@@ -14,6 +14,8 @@ export default async function FormsPage() {
 		select: {
 			id: true,
 			applicationNumber: true,
+			discordId: true,
+			email: true,
 			youtubeId: true,
 			age: true,
 			state: true,
@@ -104,6 +106,14 @@ export default async function FormsPage() {
 										<td className="py-3 px-4 text-sm text-gray-400">
 											{new Date(app.createdAt).toLocaleDateString("pt-BR")}
 										</td>
+										<td className="px-6 py-4">
+											<DualApprovalButton
+												applicationId={app.id}
+												youtubeId={app.youtubeId}
+												email={app.email}
+												discordId={app.discordId || undefined}
+											/>
+										</td>
 									</tr>
 								))}
 							</tbody>
@@ -146,7 +156,6 @@ function StatusBadge({ status }: { status: string }) {
 		</span>
 	);
 }
-
 
 //todo: mudar o botão de logout para src/components/
 //todo: remover o logout button
